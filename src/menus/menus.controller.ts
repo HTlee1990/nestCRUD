@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MenusService } from './menus.service';
 import { Lunch } from '../entities/lunchLists.entity';
 @Controller('menus')
@@ -7,7 +7,20 @@ export class MenusController {
   @Get()
   saySth(): Promise<Lunch[]> {
     // return 'working??';
-    console.log(this.MenusService.findAll());
     return this.MenusService.findAll();
+  }
+
+  @Post()
+  addMenu(
+    @Body()
+    menu: {
+      name: string;
+      category: string;
+      menu: string;
+      isNoodle: string;
+      distance: string;
+    },
+  ) {
+    return this.MenusService.addMenu(menu);
   }
 }

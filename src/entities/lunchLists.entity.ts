@@ -22,4 +22,7 @@ export class Lunch {
 
   @Column()
   lastVisit: string;
+
+  @Column()
+  count: number;
 }

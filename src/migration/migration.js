@@ -7,7 +7,7 @@ module.exports = {
   database: 'lunch',
   entities: ['entity/*.js'],
   migrationsTableName: 'custom_migration_table',
-  migrations: ['dist/migration/**/*.js'],
+  migrations: ['migration/*.js'],
   cli: {
     migrationsDir: 'migration',
   },

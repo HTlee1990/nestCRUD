@@ -13,7 +13,20 @@ export class MenusService {
     return this.lunchRepository.find();
   }
 
-  sayMenu(): string {
-    return 'Congrats!';
+  addMenu(m: {
+    name: string;
+    category: string;
+    menu: string;
+    distance: string;
+    isNoodle: string;
+  }) {
+    const newMenu = {
+      ...m,
+      lastVisit: Date(),
+      count: 1,
+    };
+
+    this.lunchRepository.insert(newMenu);
+    return newMenu;
   }
 }
