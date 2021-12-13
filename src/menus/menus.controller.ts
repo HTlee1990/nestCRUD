@@ -6,7 +6,6 @@ export class MenusController {
   constructor(private readonly MenusService: MenusService) {}
   @Get()
   saySth(): Promise<Lunch[]> {
-    // return 'working??';
     return this.MenusService.findAll();
   }
 
@@ -22,5 +21,10 @@ export class MenusController {
     },
   ) {
     return this.MenusService.addMenu(menu);
+  }
+
+  @Post()
+  deleteMenu(@Body() menu) {
+    console.log(menu);
   }
 }
