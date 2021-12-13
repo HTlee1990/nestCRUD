@@ -7,9 +7,10 @@
     </div>
     <h3>오늘의 메뉴</h3>
     <MenuFilter />
-    <p class="today__menu" v-show="!clicked">"오늘 점심 메뉴는?"</p>
-    <p class="today__menu" v-show="clicked">{{ menu }}</p>
+    <p class="today__menu">"오늘 점심 메뉴는?"</p>
+    <p class="today__menu">{{ menu }}</p>
     <button class="menuBtn" @click="getMenu">Click!</button>
+    <p class="today__menu">메뉴는</p>
     <!-- <video width="400" controls Autoplay="autoplay">
         <source src="../assets/Cannon.mov" type="video/mp4" />
       </video> -->
@@ -56,12 +57,14 @@ export default {
 
 <style scoped>
 .today__menu {
-  animation: rotate_text 0.15s linear 5;
+  /* animation: rotate_text 0.15s linear 5; */
 }
-.menuBtn:click .today__menu {
+
+.menuBtn:hover .today__menu {
   color: red;
-  animation: rotate_text 0.15s linear 5;
+  /* animation: rotate_text 0.15s linear 5; */
 }
+
 @keyframes rotate_text {
   from {
     transform: rotateX(0deg);
