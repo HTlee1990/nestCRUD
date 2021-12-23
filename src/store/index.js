@@ -16,6 +16,11 @@ export default new Vuex.Store({
       const res = await axios.post("http://localhost:3000/menus/go", { place })
       console.log(res)
     },
+
+    async addMenu(state, menu) {
+      const res = await axios.post("http://localhost:3000/menus", menu)
+      console.log(res)
+    },
   },
   actions: {},
   modules: {},
