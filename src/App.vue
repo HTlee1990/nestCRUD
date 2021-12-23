@@ -11,40 +11,7 @@
 <script>
 export default {
   data() {
-    const bcrypt = {}
-    bcrypt.hash = function (s, salt, callback, progressCallback) {
-      function _async(callback) {
-        if (typeof s === "string" && typeof salt === "number")
-          bcrypt.genSalt(salt, function (err, salt) {
-            _hash(s, salt, callback, progressCallback)
-          })
-        else if (typeof s === "string" && typeof salt === "string")
-          _hash(s, salt, callback, progressCallback)
-        else
-          nextTick(
-            callback.bind(
-              this,
-              Error("Illegal arguments: " + typeof s + ", " + typeof salt)
-            )
-          )
-      }
-
-      if (callback) {
-        if (typeof callback !== "function")
-          throw Error("Illegal callback: " + typeof callback)
-        _async(callback)
-      } else
-        return new Promise(function (resolve, reject) {
-          _async(function (err, res) {
-            if (err) {
-              reject(err)
-              return
-            }
-            resolve(res)
-          })
-        })
-    }
-    console.log("[From App]", bcrypt)
+    return {}
   },
 }
 </script>

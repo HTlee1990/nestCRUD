@@ -13,8 +13,8 @@
           <option>한식</option>
           <option>일식</option>
           <option>중식</option>
-          <option>분식</option>
           <option>양식</option>
+          <option>기타</option>
         </select>
       </div>
       <div class="input__container">

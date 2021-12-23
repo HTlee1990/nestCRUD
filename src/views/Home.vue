@@ -1,21 +1,21 @@
 <template>
   <div class="home">
-    <!-- <div> -->
     <div class="firework">
       <div class="before"></div>
       <div class="after"></div>
     </div>
     <h3>오늘의 메뉴</h3>
-    <MenuFilter />
+    <MenuFilter v-bind:filterForm="filterForm" />
     <p class="today__menu">"오늘 점심 메뉴는?"</p>
     <p class="today__menu">{{ menu }}</p>
+    <div>
+      <button class="menuBtn" v-if="menu" @click="decidePlace">결정!</button>
+    </div>
     <button class="menuBtn" @click="getMenu">Click!</button>
-    <p class="today__menu">메뉴는</p>
-    <!-- <video width="400" controls Autoplay="autoplay">
-        <source src="../assets/Cannon.mov" type="video/mp4" />
-      </video> -->
+    <!-- <p v-for="list in this.$store.state.dummyMenu" :key="list.id">
+      {{ list.name }}
+    </p> -->
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -31,27 +31,35 @@ export default {
   data() {
     return {
       menu: "",
-      dummyMenu: this.$store.state.dummyMenu,
+      dummyMenu: [],
       clicked: false,
+      filterForm: {
+        category: "",
+        rice: "",
+        distance: "",
+      },
     }
   },
   methods: {
-    //단순 랜덤으로 메뉴고르는 함수
-    getMenu() {
-      setTimeout(() => {
-        const randomNum = Math.floor(Math.random() * this.dummyMenu.length)
-        this.menu = this.dummyMenu[randomNum].name
-        console.log(this.menu)
-        this.clicked = true
-      }, 1000)
+    //pick randomly menu in filteredList
+    async getMenu() {
+      const res = await axios.get("http://localhost:3000/menus", {
+        params: this.filterForm,
+      })
+      this.$store.commit("setMenus", res.data)
+      const randomNum = Math.floor(
+        Math.random() * this.$store.state.dummyMenu.length
+      )
+      this.menu = this.$store.state.dummyMenu[randomNum].name
+    },
+
+    //update lastVisit data
+    decidePlace() {
+      this.$store.commit("letsgo", this.menu)
     },
   },
   computed: {},
-  async mounted() {
-    const res = await axios.get("http://localhost:3000/menus")
-    this.$store.state.dummyMenu = res.data
-    // .then((res) => (this.$store.state.dummyMenu = res.data))
-  },
+  async mounted() {},
 }
 </script>
 
